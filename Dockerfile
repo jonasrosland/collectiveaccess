@@ -8,28 +8,28 @@ ENV APACHE_RUN_DIR      /var/run/apache2
 ENV APACHE_LOCK_DIR     /var/lock/apache2
 ENV APACHE_LOG_DIR      /var/log/apache2
 
-ENV CA_PROVIDENCE_VERSION=1.7.2
+ENV CA_PROVIDENCE_VERSION=1.7.8
 ENV CA_PROVIDENCE_DIR=/var/www/providence
-ENV CA_PAWTUCKET_VERSION=1.7
+ENV CA_PAWTUCKET_VERSION=1.7.8
 ENV CA_PAWTUCKET_DIR=/var/www
 
 RUN apt-get update && apt-get install -y apache2 \
-					php7.0 \
-					libapache2-mod-php7.0 \
-					curl \
-					php-mysql \
-					mysql-client \
-					curl \
-					php7.0-curl \
-					php7.0-xml \
-					zip \
-					wget \
-					ffmpeg \
-					ghostscript \
-					imagemagick \
-					php7.0-gd \
-					libreoffice \
-					php7.0-zip
+	curl \
+	wget \
+	zip \
+	php7.0 \
+	php7.0-curl \
+	php7.0-gd \
+	php7.0-xml \
+	php7.0-zip \
+	php-mysql \
+	php-ldap \
+	libapache2-mod-php7.0 \
+	mysql-client \
+	ffmpeg \
+	ghostscript \
+	imagemagick \
+	libreoffice 
 
 #GMAGICK
 RUN apt-get install -y php-pear php7.0-dev graphicsmagick libgraphicsmagick1-dev \
@@ -46,13 +46,18 @@ RUN cd $CA_PAWTUCKET_DIR && cp setup.php-dist setup.php
 RUN sed -i "s@DocumentRoot \/var\/www\/html@DocumentRoot \/var\/www@g" /etc/apache2/sites-available/000-default.conf
 RUN rm -rf /var/www/html
 RUN ln -s /$CA_PROVIDENCE_DIR/media /$CA_PAWTUCKET_DIR/media
+
 RUN chown -R www-data:www-data /var/www
-#COPY php.ini /etc/php/7.0/cli/php.ini
+
+# Create a backup of the default conf files in case directory is mounted
+RUN mkdir -p /var/ca/providence/conf
+RUN cp /$CA_PROVIDENCE_DIR/app/conf/* /var/ca/providence/conf
+
+# Copy our local files
 COPY php.ini /etc/php/7.0/apache2/php.ini
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
+
+# Run apcache from entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-
 CMD [ "/usr/sbin/apache2", "-DFOREGROUND" ]
-
-
