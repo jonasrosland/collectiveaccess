@@ -11,7 +11,9 @@
 
 You should not use the latest tag, it is unstable and can break
 
-Please use from tag 1.0 onwards.
+Please use from tag 1.0.0 onwards.
+
+The `DISPLAY_NAME` is the name of your archive that will show in the tab title and on Pawtucket.
 
 ## Usage
 
@@ -38,6 +40,6 @@ Please use from tag 1.0 onwards.
         -e SMTP_SERVER=mail.my-archive.tld  # optional
         -v /var/ca/conf:/var/www/providence/app/conf
         -v /var/ca/media:/var/www/providence/media/
-        pkuehne/collectiveaccess:1.0
+        pkuehne/collectiveaccess:1.0.0
 
     # Go to https://domain_or_ip:8080/providence to setup the database structure
