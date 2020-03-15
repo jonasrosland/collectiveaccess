@@ -22,7 +22,7 @@ sweep() {
 	sed -i -e "/__CA_DB_DATABASE__/s/'.*'/'$DB_NAME'/" setup.php
 
 	if [[ "$DISPLAY_NAME" != "" ]];then
-		sed -i -e "/__CA_APP_DISPLAY_NAME__/s/'.*'/'$DISPLAY_NAME'/" setup.php
+		sed -i -e "/__CA_APP_DISPLAY_NAME__/s/\"M.*m\"/\"$DISPLAY_NAME\"/" setup.php
 	fi
 	if [[ "$ADMIN_EMAIL" != "" ]];then
 		sed -i -e "/__CA_ADMIN_EMAIL__/s/'.*'/'$ADMIN_EMAIL'/" setup.php
