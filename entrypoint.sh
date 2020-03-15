@@ -10,9 +10,7 @@ cd $CA_PROVIDENCE_DIR/media/collectiveaccess && mkdir -p tilepics images
 cd $CA_PAWTUCKET_DIR && chown www-data:www-data . -R && chmod -R u+rX .
 cd $CA_PROVIDENCE_DIR && chown www-data:www-data . -R && chmod -R u+rX .
 
-if [ "$(ls -A /$CA_PROVIDENCE_DIR/app/conf/)" ]; then
-	# Config files already exist
-else
+if [[ ! "$(ls -A /$CA_PROVIDENCE_DIR/app/conf/)" ]]; then
 	cp -r /var/ca/providence/conf/* /$CA_PROVIDENCE_DIR/app/conf/
 fi
 
