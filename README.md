@@ -4,8 +4,14 @@
 
 - This image does not contain MySQL, it needs to be linked
 - Contains both Providence and Pawtucket2
-- Pawtucket is access by `https://domain_or_ipaddress:port/`
+- Pawtucket is accessed by `https://domain_or_ipaddress:port/`
 - Providence is accessed by `https://domain_or_ipaddress:port/providence`
+
+## Note
+
+You should not use the latest tag, it is unstable and can break
+
+Please use from tag 1.0 onwards.
 
 ## Usage
 
@@ -32,6 +38,6 @@
         -e SMTP_SERVER=mail.my-archive.tld  # optional
         -v /var/ca/conf:/var/www/providence/app/conf
         -v /var/ca/media:/var/www/providence/media/
-        pkuehne/collectiveaccess:latest
+        pkuehne/collectiveaccess:1.0
 
     # Go to https://domain_or_ip:8080/providence to setup the database structure

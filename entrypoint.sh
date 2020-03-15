@@ -16,19 +16,19 @@ fi
 
 sweep() {
 	local ca="$ca"
-	sed -i -e "/__CA_DB_HOST__/s/'.*'/$MYSQL_PORT_3306_TCP_ADDR/" setup.php
-	sed -i -e "/__CA_DB_USER__/s/'.*'/$DB_USER/" setup.php
-	sed -i -e "/__CA_DB_PASSWORD__/s/'.*'/$DB_PW/" setup.php
-	sed -i -e "/__CA_DB_DATABASE__/s/'.*'/$DB_NAME/" setup.php
+	sed -i -e "/__CA_DB_HOST__/s/'.*'/'$MYSQL_PORT_3306_TCP_ADDR'/" setup.php
+	sed -i -e "/__CA_DB_USER__/s/'.*'/'$DB_USER'/" setup.php
+	sed -i -e "/__CA_DB_PASSWORD__/s/'.*'/'$DB_PW'/" setup.php
+	sed -i -e "/__CA_DB_DATABASE__/s/'.*'/'$DB_NAME'/" setup.php
 
 	if [[ "$DISPLAY_NAME" != "" ]];then
-		sed -i -e "/__CA_APP_DISPLAY_NAME__/s/'.*'/$DISPLAY_NAME/" setup.php
+		sed -i -e "/__CA_APP_DISPLAY_NAME__/s/'.*'/'$DISPLAY_NAME'/" setup.php
 	fi
 	if [[ "$ADMIN_EMAIL" != "" ]];then
-		sed -i -e "/__CA_ADMIN_EMAIL__/s/'.*'/$ADMIN_EMAIL/" setup.php
+		sed -i -e "/__CA_ADMIN_EMAIL__/s/'.*'/'$ADMIN_EMAIL'/" setup.php
 	fi
 	if [[ "$SMTP_SERVER" != "" ]];then
-		sed -i -e "/__CA_SMTP_SERVER__/s/'.*'/$SMTP_SERVER/g" setup.php
+		sed -i -e "/__CA_SMTP_SERVER__/s/'.*'/'$SMTP_SERVER'/g" setup.php
 	fi
 }
 cd $CA_PROVIDENCE_DIR
