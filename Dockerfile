@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 ENV APACHE_RUN_USER     www-data
 ENV APACHE_RUN_GROUP    www-data
