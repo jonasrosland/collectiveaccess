@@ -13,6 +13,9 @@ ENV CA_PROVIDENCE_DIR=/var/www/providence
 ENV CA_PAWTUCKET_VERSION=1.7.8
 ENV CA_PAWTUCKET_DIR=/var/www
 
+ENV TZ=America/Argentina/Buenos_Aires
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y apache2 \
 	curl \
 	wget \
