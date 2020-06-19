@@ -9,11 +9,17 @@
 
 ## Note
 
-You should not use the `latest` tag, it is unstable and can break
+You should not use the `latest` tag, it is unstable and can break.
 
 Please use from tag 1.0.0 onwards.
 
 The `DISPLAY_NAME` is the name of your archive that will show in the tab title and on Pawtucket.
+
+## Pull Requests
+
+If you fork the repo and make some changes that other's can use as well, please contribute them back as a PR!
+
+Thanks to @martjanz for contributing.
 
 ## Usage with Docker Compose
 
@@ -25,7 +31,6 @@ If any error occur you can check containers status with `docker ps -a` and if so
 
 Providence (admin UI) will be running on http://server-ip:8080/providence
 Pawtucket (client UI) will be running on http://server-ip:8080/
-
 
 ## Usage with Docker
 
