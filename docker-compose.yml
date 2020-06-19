@@ -22,7 +22,7 @@ services:
       - DB_ROOT_PASSWORD=rootpass
       - DB_USER=user
       - DB_PASSWORD=pass
-      - DISPLAY_NAME=Filmoteca # optional
+      - DISPLAY_NAME=My Archive # optional
       - ADMIN_EMAIL=admin@my-archive.tld # optional
       - SMTP_SERVER=mail.my-archive.tld  # optional
     volumes:

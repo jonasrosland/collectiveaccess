@@ -7,7 +7,7 @@ mysql --host=$DB_HOST --user=root --password=$DB_ROOT_PASSWORD -e "CREATE DATABA
 mysql --host=$DB_HOST --user=root --password=$DB_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER' IDENTIFIED BY '$DB_PASSWORD';"
 
 # Create necessary directories and own them to www-data
-echo "Creating necessary directories and own them to www-data..."
+echo "Creating necessary directories and owning them to www-data..."
 cd $CA_PROVIDENCE_DIR/media && mkdir -p collectiveaccess
 cd $CA_PROVIDENCE_DIR/media/collectiveaccess && mkdir -p tilepics images
 cd $CA_PAWTUCKET_DIR && chown www-data:www-data . -R && chmod -R u+rX .

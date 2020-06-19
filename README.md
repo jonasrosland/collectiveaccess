@@ -9,7 +9,7 @@
 
 ## Note
 
-You should not use the latest tag, it is unstable and can break
+You should not use the `latest` tag, it is unstable and can break
 
 Please use from tag 1.0.0 onwards.
 
@@ -44,6 +44,7 @@ Pawtucket (client UI) will be running on http://server-ip:8080/
     docker run
         -–link ca_mysql:mysql
         -p 8080:80
+        -e DB_HOST=ca_mysql
         -e DB_USER=user
         -e DB_PASSWORD=pass
         -e DB_NAME=collective
@@ -52,7 +53,7 @@ Pawtucket (client UI) will be running on http://server-ip:8080/
         -e SMTP_SERVER=mail.my-archive.tld  # optional
         -v /var/ca/conf:/var/www/providence/app/conf
         -v /var/ca/media:/var/www/providence/media/
-        martjanz/collectiveaccess:1.0.0
+        pkuehne/collectiveaccess:1.1.0
 
     # Go to https://domain_or_ip:8080/providence to setup the database structure
 
