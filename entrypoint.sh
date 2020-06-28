@@ -2,10 +2,13 @@
 set -e
 
 #DATABASE INIT/CONFIG
-mysql -h $MYSQL_PORT_3306_TCP_ADDR -uroot -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
-mysql -h $MYSQL_PORT_3306_TCP_ADDR -uroot -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER' IDENTIFIED BY '$DB_PW';"
+echo "Initializing configuration database..."
+mysql --host=$DB_HOST --user=root --password=$DB_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+mysql --host=$DB_HOST --user=root --password=$DB_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER' IDENTIFIED BY '$DB_PASSWORD';"
 
 # Create necessary directories and own them to www-data
+echo "Creating necessary directories and owning them to www-data..."
+cd $CA_PROVIDENCE_DIR/media && mkdir -p collectiveaccess
 cd $CA_PROVIDENCE_DIR/media/collectiveaccess && mkdir -p tilepics images
 cd $CA_PAWTUCKET_DIR && chown www-data:www-data . -R && chmod -R u+rX .
 cd $CA_PROVIDENCE_DIR && chown www-data:www-data . -R && chmod -R u+rX .
@@ -16,9 +19,9 @@ fi
 
 sweep() {
 	local ca="$ca"
-	sed -i -e "/__CA_DB_HOST__/s/'.*'/'$MYSQL_PORT_3306_TCP_ADDR'/" setup.php
+	sed -i -e "/__CA_DB_HOST__/s/'.*'/'$DB_HOST'/" setup.php
 	sed -i -e "/__CA_DB_USER__/s/'.*'/'$DB_USER'/" setup.php
-	sed -i -e "/__CA_DB_PASSWORD__/s/'.*'/'$DB_PW'/" setup.php
+	sed -i -e "/__CA_DB_PASSWORD__/s/'.*'/'$DB_PASSWORD'/" setup.php
 	sed -i -e "/__CA_DB_DATABASE__/s/'.*'/'$DB_NAME'/" setup.php
 
 	if [[ "$DISPLAY_NAME" != "" ]];then
@@ -38,4 +41,5 @@ cd $CA_PAWTUCKET_DIR
 ca='paw'
 sweep $ca
 
+echo "Running image..."
 exec "$@"

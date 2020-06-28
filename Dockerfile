@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 ENV APACHE_RUN_USER     www-data
 ENV APACHE_RUN_GROUP    www-data
@@ -13,26 +13,28 @@ ENV CA_PROVIDENCE_DIR=/var/www/providence
 ENV CA_PAWTUCKET_VERSION=1.7.8
 ENV CA_PAWTUCKET_DIR=/var/www
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y apache2 \
 	curl \
 	wget \
 	zip \
-	php7.0 \
-	php7.0-curl \
-	php7.0-gd \
-	php7.0-xml \
-	php7.0-zip \
+	php7.4 \
+	php7.4-curl \
+	php7.4-gd \
+	php7.4-xml \
+	php7.4-zip \
 	php-mysql \
 	php-ldap \
-	libapache2-mod-php7.0 \
+	libapache2-mod-php7.4 \
 	mysql-client \
 	ffmpeg \
 	ghostscript \
 	imagemagick \
-	libreoffice 
+	libreoffice
 
 #GMAGICK
-RUN apt-get install -y php-pear php7.0-dev graphicsmagick libgraphicsmagick1-dev \
+RUN apt-get install -y php-pear php7.4-dev graphicsmagick libgraphicsmagick1-dev \
 	&& pecl install gmagick-2.0.4RC1
 
 RUN curl -SsL https://github.com/collectiveaccess/providence/archive/$CA_PROVIDENCE_VERSION.tar.gz | tar -C /var/www/ -xzf -
@@ -54,7 +56,7 @@ RUN mkdir -p /var/ca/providence/conf
 RUN cp -r /$CA_PROVIDENCE_DIR/app/conf/* /var/ca/providence/conf
 
 # Copy our local files
-COPY php.ini /etc/php/7.0/apache2/php.ini
+COPY php.ini /etc/php/7.4/apache2/php.ini
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
 
