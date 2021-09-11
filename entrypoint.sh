@@ -10,12 +10,13 @@ mysql --host=$DB_HOST --user=root --password=$DB_ROOT_PASSWORD -e "GRANT ALL PRI
 echo "Creating necessary directories and owning them to www-data..."
 cd $CA_PROVIDENCE_DIR/media && mkdir -p collectiveaccess
 cd $CA_PROVIDENCE_DIR/media/collectiveaccess && mkdir -p tilepics images
-cd $CA_PAWTUCKET_DIR && chown www-data:www-data . -R && chmod -R u+rX .
-cd $CA_PROVIDENCE_DIR && chown www-data:www-data . -R && chmod -R u+rX .
+#cd $CA_PAWTUCKET_DIR && chown www-data:www-data . -R && chmod -R u+rX .
+#cd $CA_PROVIDENCE_DIR && chown www-data:www-data media -R && chmod -R u+rX .
+cd $CA_PROVIDENCE_DIR && chown www-data:www-data media -R
 
-if [[ ! "$(ls -A /$CA_PROVIDENCE_DIR/app/conf/)" ]]; then
-	cp -r /var/ca/providence/conf/* /$CA_PROVIDENCE_DIR/app/conf/
-fi
+#if [[ ! "$(ls -A /$CA_PROVIDENCE_DIR/app/conf/)" ]]; then
+#	cp -r /var/ca/providence/conf/* /$CA_PROVIDENCE_DIR/app/conf/
+#fi
 
 sweep() {
 	local ca="$ca"

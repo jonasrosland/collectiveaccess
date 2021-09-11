@@ -26,8 +26,9 @@ services:
       - ADMIN_EMAIL=admin@my-archive.tld # optional
       - SMTP_SERVER=mail.my-archive.tld  # optional
     volumes:
-        - backend-config:/var/www/providence/app/conf
-        - backend-media:/var/www/providence/media/
+        - backend-config:/var/www/html/providence/app/conf
+        - backend-media:/var/www/html/providence/media/
+        - ./dublincore_qualif_2018.xml:/var/www/html/providence/install/profiles/xml/dublincore_qualif_2018.xml
     depends_on:
       - db
     ports:
